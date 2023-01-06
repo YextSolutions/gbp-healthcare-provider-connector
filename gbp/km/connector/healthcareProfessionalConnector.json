@@ -2987,7 +2987,11 @@
     {
       "field": "categories",
       "header": "Categories",
-      "subfieldPath": []
+      "subfieldPath": [
+        {
+          "name": "yext"
+        }
+      ]
     },
     {
       "field": "hours",
