@@ -1709,6 +1709,16 @@
         "type": "JSON",
         "header": "Healthcare Professional Category",
         "path": "categories.primaryCategory.name"
+      },
+      {
+        "type": "JSON",
+        "header": "Primary Category ID for Override",
+        "path": "categories.primaryCategory.name"
+      },
+      {
+        "type": "JSON",
+        "header": "Secondary Category IDs for Override",
+        "path": "categories.additionalCategories[].name"
       }
     ]
   },
@@ -2669,6 +2679,45 @@
         },
         "plugin": "filterCategories",
         "function": "healthcareProfessionalCategoryFilter"
+      }
+    },
+    {
+      "mergeColumns": {
+        "inputHeaders": [
+          "Primary Category ID for Override",
+          "Secondary Category IDs for Override"
+        ],
+        "newColumnHeader": "Categories for GBP Override",
+        "delimiter": ","
+      }
+    },
+    {
+      "findAndReplace": {
+        "inputHeaders": {
+          "headers": [
+            "Categories for GBP Override"
+          ]
+        },
+        "valueToFind": {
+          "plainText": {
+            "value": "categories/",
+            "ignoreCase": false
+          }
+        },
+        "replacement": ""
+      }
+    },
+    {
+      "findAndReplace": {
+        "inputHeaders": {
+          "headers": [
+            "Categories for GBP Override"
+          ]
+        },
+        "valueToFind": {
+          "regex": ",\\Z"
+        },
+        "replacement": ""
       }
     }
   ],
@@ -4183,6 +4232,15 @@
       "subfieldPath": [
         {
           "name": "line3"
+        }
+      ]
+    },
+    {
+      "field": "categories",
+      "header": "Categories for GBP Override",
+      "subfieldPath": [
+        {
+          "name": "googleBusinessProfile"
         }
       ]
     }
